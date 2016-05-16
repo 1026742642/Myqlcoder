@@ -1,4 +1,4 @@
-package qlcoder.touristccount;
+package qlcoder.task758a;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,24 +33,27 @@ public class Gen {
 	}
 	public static void main(String[] args)
 	{
+		long start = System.currentTimeMillis();
 		Map<Long, Long> total = new HashMap<Long, Long>();
 		Gen rand=new Gen();
+		Long max = 0L;
+		Long id = 0L;
+//		for(long i=0;i<5000000L;i++)
 		for(long i=0;i<5000000000L;i++)
 		{
 			long num = rand.next();
-			if(total.get(num) != null){
+			if(total.containsKey(num)){
 				total.put(num, total.get(num)+1L);
 			}else{
 				total.put(num, 1L);
 			}
-		}
-		Long max = 0L;
-		Long id = 0L;
-		for (Map.Entry<Long, Long> entry : total.entrySet()) {
-			if(max < entry.getValue()){
-				max = entry.getValue();
-				id = entry.getKey();
+			if(max < total.get(num)){
+				max = total.get(num);
+				id = num;
 			}
 		}
+		System.out.println("id:"+id +"\nappear:" + max);
+		long end = System.currentTimeMillis();
+		System.out.println((end - start) / 1000f + " seconds");
 	}
 }
