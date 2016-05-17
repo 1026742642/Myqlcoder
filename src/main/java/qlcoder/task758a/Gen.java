@@ -37,9 +37,10 @@ public class Gen {
 		Map<Long, Long> total = new HashMap<Long, Long>();
 		Gen rand=new Gen();
 		Long max = 0L;
+		Long temp = 0L;
 		Long id = 0L;
-//		for(long i=0;i<5000000L;i++)
-		for(long i=0;i<5000000000L;i++)
+		for(long i=0, j=9000000L;i<9000000L ;i++,j--)
+//		for(long i=0;i<5000000000L;i++)
 		{
 			long num = rand.next();
 			if(total.containsKey(num)){
@@ -50,6 +51,11 @@ public class Gen {
 			if(max < total.get(num)){
 				max = total.get(num);
 				id = num;
+			}else if(temp < total.get(num)){
+				temp = total.get(num);
+				if((max-temp)>j){
+					break;
+				}
 			}
 		}
 		System.out.println("id:"+id +"\nappear:" + max);
